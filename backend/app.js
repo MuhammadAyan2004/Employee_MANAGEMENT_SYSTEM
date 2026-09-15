@@ -1,16 +1,19 @@
 const express = require('express')
-const authRouter = require('./model/authRouter')
+const dotenv = require('dotenv')
+const cookieParser = require('cookie-parser')
+
+const authRouter = require('./routes/authRouter')
+const { loadUser } = require('./utils/loadUser')
 
 const app = express()
 
-
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+dotenv.config()
+
+app.use(cookieParser())
+app.use(loadUser)
 
 app.use(authRouter)
-// app.get("/signUp",(req, res)=>{
-//     res.status(200).json({ message: "Route is working" })
-// })
-
 
 module.exports = app
