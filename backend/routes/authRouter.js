@@ -4,10 +4,8 @@ const { authMiddleware } = require('../middleware/authmiddleware')
 
 const authRouter = express.Router()
 
-
-authRouter.get("/", authController.getHomePage)
 authRouter.post("/login", authController.postLogin)
-authRouter.get("/logout", authController.postLogout )
+authRouter.post("/logout", authController.postLogout )
 authRouter.get("/currentUser", authMiddleware ,authController.getCurrentUser )
 
 
