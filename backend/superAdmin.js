@@ -9,11 +9,11 @@ const createSuperAdmin = async () => {
     if (!DB_PATH || !SUPERADMIN_NAME || !SUPERADMIN_EMAIL || !SUPERADMIN_PASSWORD || !SUPERADMIN_USER_ID || !SUPERADMIN_PHONE || !SUPERADMIN_ADDRESS) {
         throw new Error("Set DB_PATH, SUPERADMIN_NAME, SUPERADMIN_EMAIL, SUPERADMIN_PASSWORD, SUPERADMIN_USER_ID,SUPERADMIN_PHONE, and SUPERADMIN_ADDRESS before running the seed script")
     }
-    
+
     if (SUPERADMIN_PASSWORD.length < 12) throw new Error("SUPERADMIN_PASSWORD must be at least 12 characters long.")
 
     await mongoose.connect(process.env.DB_PATH)
-    const email = SUPERADMIN_EMAIL.trim().toLowerCase()
+    const email = SUPERADMIN_EMAIL.trim()
     const exixtingUser = userModel.findOne({ $or: [{ email }, { userId: SUPERADMIN_USER_ID }] })
 
     if (exixtingUser) {
